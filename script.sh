@@ -72,7 +72,7 @@ else
 
       rm -rf ./wp-content/themes/twenty*
 
-      theme_name="${sitename}-theme" | iconv -t ascii//TRANSLIT | sed -E s/[^a-zA-Z0-9]+/-/g | sed -E s/^-+\|-+$//g | tr A-Z a-z
+      theme_name=`echo "${sitename}-theme" | iconv -t ascii//TRANSLIT | sed -E s/[^a-zA-Z0-9]+/-/g | sed -E s/^-+\|-+$//g | tr A-Z a-z`
       theme_location="${PWD}/wp-content/themes/$theme_name"
 
       mkdir $theme_location
