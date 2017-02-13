@@ -16,21 +16,20 @@ if [[ $wp_check == *"command not found" ]]; then
   exit
 else
   read -p "Site Name: " sitename
+  read -p "Site URL: " siteurl
   read -p "Admin Email: " adminemail
   read -p "Database Name: " dbname
   read -p "Database Username: " dbuser
   read -p "Database password: " dbpass
   read -p "Ready to run the installer? [y/n]: " run
 
-  if [ "$run" == n ]; then
+  if [ "$run" != "y" ]; then
     exit
   else
     echo ""
     echo "Starting install using $wp_check ${colour_blue}0%${colour_end}"
 
     {
-      # Debug - remove line below before production
-      rm -rf ./tmp && mkdir ./tmp && cd tmp
       wp core download
     } &> /dev/null
 
@@ -44,7 +43,7 @@ else
 
       wp db drop --yes
       wp db create
-      wp core install --url="http://localhost:8080" --title="$sitename" --admin_user="super.user" --admin_password="$password" --admin_email="$adminemail"
+      wp core install --url="$siteurl" --title="$sitename" --admin_user="super.user" --admin_password="$password" --admin_email="$adminemail"
     } &> /dev/null
 
     echo "WordPress installed successfully    ${colour_blue}50%${colour_end}"
@@ -73,7 +72,7 @@ else
 
       rm -rf ./wp-content/themes/twenty*
 
-      theme_name="${PWD##*/}-theme"
+      theme_name="$sitename-theme" | iconv -t ascii//TRANSLIT | sed -E s/[^a-zA-Z0-9]+/-/g | sed -E s/^-+\|-+$//g | tr A-Z a-z
       theme_location="${PWD}/wp-content/themes/$theme_name"
 
       mkdir $theme_location
