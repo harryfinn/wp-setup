@@ -17,7 +17,7 @@ sudo mv script.sh /usr/local/bin/wp-setup
 ```
 
 You can now run this tool by running the following command `wp-setup` within
-a folder you wise to generate a WordPress instance within, ready for theme
+a folder you wish to generate a WordPress instance within, ready for theme
 development.
 
 ## TODO
