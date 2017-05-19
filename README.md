@@ -11,7 +11,7 @@ Download the `script.sh` file, grant executable permissions and move to suitable
 path:
 
 ```txt
-curl -O https://raw.githubusercontent.com/1minus1limited/wp-setup/master/script.sh
+curl -O https://raw.githubusercontent.com/harryfinn/wp-setup/master/script.sh
 chmod +x script.sh
 sudo mv script.sh /usr/local/bin/wp-setup
 ```
